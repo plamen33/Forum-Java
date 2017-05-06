@@ -34,7 +34,7 @@ Functionalities:
 
 4.3/ replies can be managed by their authors and by administrators
 
-5/ tree navigation in both directions is available
+5/ tree forum navigation in both directions is available
 
 6/ Admin panel for Categories, Forums and Users
 
