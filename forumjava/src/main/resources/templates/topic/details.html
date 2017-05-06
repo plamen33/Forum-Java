@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Java Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-12">
+                <article>
+                    <header>
+                        <h3 th:text="${topic.title}"></h3>
+                    </header>
+
+                    <p th:text="${topic.description}"> </p>
+                    <small>
+                        Author: <text class="author" th:text="${topic.author.fullName}"></text>
+                        <div class="pull-right">
+                            <th:block sec:authorize="isAuthenticated()" th:if="${user.isAdmin() OR user.isAuthor(topic)}">
+                                <a class="btn btn-warning btn-sm" th:href="@{/topic/edit/{id}(id = ${topic.id})}">Edit</a>
+                                <a class="btn btn-danger btn-sm" th:href="@{/topic/delete/{id}(id = ${topic.id})}">Delete</a>
+                            </th:block>
+
+                            <a class="btn btn-primary btn-sm" th:href="@{/forum/{id}(id = ${forum.id})}">Back</a>
+                            <a class="btn btn-default btn-sm" th:href="@{/}">start page &raquo;</a>
+
+                        </div>
+                    </small>
+
+                    <footer>
+
+
+                        <div class="pull-right">
+                            <th:block sec:authorize="isAuthenticated()">
+                                <a class="btn btn-success btn-sm" th:href="@{/reply/create/{id}(id = ${topic.id})}">Reply</a>
+                            </th:block>
+                        </div>
+                        <h3><p class="text-success">Replies:</p></h3>
+
+                        <table style="width:100%" class="table table-bordered">
+                            <!--<tr>-->
+                                <!--<th style="width:21%">Firstname</th>-->
+                                <!--<th>Lastname</th>-->
+                            <!--</tr>-->
+                            <th:block th:each="reply : ${replies}">
+                                <tr>
+                                    <td style="width:27%">
+                                        <b><h5>Posted by: <strong><cite title="Source Title" th:text="${reply.author.fullName}"></cite></strong></h5></b>
+                                        <img class="img-rounded" th:src="@{/images/users/{picture}(picture=${reply.author.picture})}" height="100"/>
+                                        <br />
+                                        <br />
+                                        <text>Registered at:  <cite th:text="${reply.author.regdate}"></cite> </text>
+                                        <br />
+                                        <text>Gender: </text>
+                                        <b th:text="${reply.author.gender}"></b>
+                                        <br />
+                                        <text>Replies posted: </text>
+                                        <b><text style="color:mediumblue" th:text="${reply.author.replies.size()}"></text></b>
+
+                                    </td>
+                                    <td>
+                                        <text style="font-size:120%" th:text="${reply.message}" class="text-info"></text>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><text>Reply created: <text th:text="${reply.datePosted}"></text>  </text></td>
+                                    <td>
+                                        <div class="pull-left">
+                                            <th:block sec:authorize="isAuthenticated()" th:if="${user.isAdmin() OR user.isAuthorOfReply(reply)}">
+                                                <a class="btn btn-warning btn-sm" th:href="@{/reply/edit/{id}(id = ${reply.id})}">Edit reply</a>
+                                                <a class="btn btn-danger btn-sm" th:href="@{/reply/delete/{id}(id = ${reply.id})}">Delete reply</a>
+                                            </th:block>
+                                        </div>
+                                        <b class="text-success pull-right">Updated at: <text th:text="${reply.dateUpdated}"></text>  </b>
+                                    </td>
+
+                                </tr>
+
+                            </th:block>
+
+                        </table>
+
+                    </footer>
+                </article>
+                <h4 align="center">This topic was viewed <span class="label label-info" th:text="${topic.visits}"></span> times.</h4>
+            </div>
+        </div>
+    </div>
+    <br/>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>
+
+
+<!--temp look do not delete-->
+<!--<h3><p class="text-success">Replies:</p></h3>-->
+
+<!--<th:block th:each="reply : ${replies}">-->
+    <!--<blockquote class="blockquote">-->
+        <!--<p>-->
+            <!--<a>&quot;</a><a th:text="${reply.message}"></a><a>&quot;</a>-->
+        <!--</p>-->
+        <!--<b><h5>Posted by: <strong><cite title="Source Title" th:text="${reply.author.fullName}"></cite></strong></h5></b>-->
+        <!--<small>Date of creation: <text th:text="${reply.datePosted}"></text>  </small>-->
+        <!--<small>Date updated: <text th:text="${reply.dateUpdated}"></text>  </small>-->
+        <!--&lt;!&ndash;<small th:text="${reply.dateUpdated}"></small>&ndash;&gt;-->
+    <!--</blockquote>-->
+<!--</th:block>-->

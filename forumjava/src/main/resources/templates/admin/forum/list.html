@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+<main>
+    <div class="container body-content">
+        <div class="well">
+            <h2>Forums List -
+                <a th:href="@{/admin/forum/create}" class="btn btn-warning">Create New</a>
+            </h2>
+            <div class="row">
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="forum : ${forums}">
+                        <td th:text="${forumStat.count}"></td>
+                        <td th:text="${forum.title}"></td>
+                        <td th:text="${forum.category.name}"></td>
+                        <td th:text="${forum.description}"></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                    Actions
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="alert-warning"><a th:href="@{/admin/forum/edit/{id}(id = ${forum.id})}">Edit</a></li>
+                                    <li class="alert-danger"><a th:href="@{/admin/forum/delete/{id}(id = ${forum.id})}">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

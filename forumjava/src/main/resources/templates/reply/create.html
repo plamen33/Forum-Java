@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Java Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/reply/create/{id}(id=${topic.id})}" method="POST">
+                <fieldset>
+                    <legend>New Reply</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" >Reply</label>
+                        <div class="col-sm-4 ">
+                            <textarea maxlength="1400" class="form-control"
+                                      style="min-width: 153%"
+                                      rows="8"
+                                      required="required"
+                                      placeholder="Reply"
+                                      name="message"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input type="submit" class="btn btn-primary" value="Submit"/>
+                            <a class="btn btn-default" th:href="@{/topic/{id}(id = ${topic.id})}">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>
+
+
+
+

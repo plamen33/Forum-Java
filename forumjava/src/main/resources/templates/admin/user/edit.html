@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Java Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/admin/users/edit/{id}(id=${user.id})}" method="post">
+                <div class="alert alert-danger" th:if="${error}">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong th:text="${error}"></strong>
+                </div>
+                <fieldset>
+                    <legend>Edit User</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_email">Email</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="email" id="user_email" placeholder="Email" name="email"
+                                   required="required" th:value="${user.email}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_fullname">Full Name</label>
+                        <div class="col-sm-4 ">
+                            <input class="form-control" type="text" id="user_fullname" placeholder="Full Name"
+                                   name="fullName" required="required" th:value="${user.fullName}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_gender">Gender</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="user_gender" name="gender">
+                                <option th:each="g : ${gender}" th:value="${g}" th:text="${g}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_password_first">Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="user_password_first" placeholder="Password"
+                                   name="password"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_password_second">Confirm Password</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="user_password_second" placeholder="Password"
+                                   name="confirmPassword"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="roles">Roles</label>
+                        <div class="col-sm-6">
+                            <th:block th:each="role : ${roles}">
+                                <input id="roles" type="checkbox" name="roles" th:value="${role.id}" th:text="${role.getSimpleName()}" th:checked="${user.roles.contains(role)}"/>
+                                <br/>
+                            </th:block>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input value="Edit" type="submit" class="btn btn-success"/>
+                            <a class="btn btn-default" th:href="@{/admin/users/}">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

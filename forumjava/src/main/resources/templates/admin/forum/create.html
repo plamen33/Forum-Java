@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/admin/forum/create}" method="POST">
+                <fieldset>
+                    <legend>New Forum</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="forum_title">Forum Title</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="forum_title" placeholder="Forum Title"
+                                   name="title" required="required"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="forum_content">Description</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="6" id="forum_content" name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="forum_category">Category</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="forum_category" name="categoryId">
+                                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" th:href="@{/admin/forums}">Cancel</a>
+                            <input type="submit" class="btn btn-primary" value="Submit"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/reply/delete/{id}(id=${reply.id})}" method="POST">
+                <fieldset>
+                    <legend>Delete Reply</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="reply_message">Reply</label>
+                        <div class="col-sm-6">
+                            <textarea maxlength="1400" class="form-control" rows="7" id="reply_message" name="message" th:inline="text" disabled="disabled">[[${reply.message}]]</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                            <a class="btn btn-default" th:href="@{/topic/{id}(id = ${topic.id})}">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

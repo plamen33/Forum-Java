@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" th:action="@{/reply/edit/{id}(id=${reply.id})}" method="POST">
+                <fieldset>
+                    <legend>Edit Reply</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="reply_message">Reply</label>
+                        <div class="col-sm-6">
+                            <textarea maxlength="1400" class="form-control" rows="7" id="reply_message" name="message" th:inline="text" required="required">[[${reply.message}]]</textarea>
+                            <!--<textarea class="form-control" rows="6" name="commentString" th:field="${comment.text}" required="required"></textarea>-->
+                            <!--<input type="text" class="form-control" rows="6" name="commentString" th:value="${comment.text}" required="required"/>-->
+                            <!--<input type="text" class="form-control" rows="6" id="comment_content" name="commentString" th:value="${comment.text}" required="required"/>-->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input type="submit" class="btn btn-warning" value="Edit"/>
+                            <a class="btn btn-default" th:href="@{/topic/{id}(id = ${topic.id})}">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

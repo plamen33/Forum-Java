@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+<title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+<main>
+<div class="container body-content">
+<div class="well">
+<h3>
+    Category - <th:block th:text="${category.name}"></th:block>
+    <span class="pull-right" ><a class="btn btn-primary btn-sm" th:href="@{/}">Back</a></span>
+</h3>
+
+<div class="row">
+<table class="table table-striped table-hover ">
+<thead>
+<tr>
+<th>#</th>
+<th>Forum Title</th>
+<th>Description</th>
+<th>Count of Topics</th>
+</tr>
+</thead>
+<tbody>
+
+<tr th:each="forum : ${forums}">
+<td th:text="${forumStat.count}"></td>
+    <td><a th:href="@{/forum/{id}(id=${forum.id}) }" th:text="${forum.title}"></a></td>
+<td th:text="${forum.description}"></td>
+<td th:text="${forum.topics.size()}"></td>
+
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head th:replace="layout :: head">-->
+    <!--<title>Software Forum</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<header th:replace="layout :: header" />-->
+
+<!--<main>-->
+    <!--<div class="container body-content">-->
+        <!--<h1>Category - <th:block th:text="${category.name}"></th:block></h1>-->
+        <!--<div class="row">-->
+            <!--<th:block th:each="forum : ${forums}">-->
+                <!--<div class="col-md-6">-->
+                    <!--<topic>-->
+                        <!--<header>-->
+                            <!--<h2 th:text="${forum.title}"></h2>-->
+                        <!--</header>-->
+
+                        <!--<p th:text="${forum.summary}"></p>-->
+
+
+                        <!--<footer>-->
+                            <!--<div class="pull-center">-->
+                                <!--<a class="btn btn-default" th:href="@{/forum/{id}(id=${forum.id}) }">Read more &raquo;</a>-->
+
+                            <!--</div>-->
+                        <!--</footer>-->
+                    <!--</topic>-->
+                <!--</div>-->
+            <!--</th:block>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br/>-->
+<!--</main>-->
+
+<!--<footer th:replace="layout :: footer" />-->
+<!--</body>-->
+
+<!--</html>-->
+

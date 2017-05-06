@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <div class="alert alert-danger">
+                <h4><strong>Warning!</strong> You are about to delete this topic with all associated replies. Are you sure ?</h4>
+            </div>
+            <form class="form-horizontal" th:action="@{/topic/delete/{id}(id=${topic.id})}" method="POST">
+                <fieldset>
+                    <legend>Delete Topic</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="topic_title">Topic Title</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="topic_title" placeholder="Post Title" name="title" th:value="${topic.title}" disabled="disabled"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="topic_description">Description</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="6" id="topic_description" name="description" th:field="${topic.description}" disabled="disabled"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                            <a class="btn btn-default" th:href="@{/topic/{id}(id = ${topic.id})}">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Java Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-container">
+        <div class="alert alert-warning" th:if="${changePic}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong th:text="${changePic}"></strong>
+        </div>
+        <form th:action="@{/profile}" method="post"  enctype="multipart/form-data">
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                <div>
+                    <img class="img-rounded" th:src="@{/images/users/{picture}(picture=${user.picture})}" height="200"/>
+                    <br/>
+                    <br/>
+                    <text><b>Email:</b> </text>
+                    <span th:text="${user.email}"></span>
+                    <br/>
+                    <text><b>Full name:</b> </text>
+                    <span th:text="${user.fullName}"></span>
+                    <br/>
+                    <text><b>Registered at: </b></text>
+                    <span th:text="${user.regdate}"></span>
+                    <br/>
+                    <text><b>Gender:</b> </text>
+                    <span th:text="${user.gender}"></span>
+
+                    <div class="row">
+                        <label class="col-sm-4 control-label" for="user_picture">Change profile photo: </label>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <input align="left" type="file"  id="user_picture" name="picture" onchange="this.form.submit()"/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</main>
+<br/>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

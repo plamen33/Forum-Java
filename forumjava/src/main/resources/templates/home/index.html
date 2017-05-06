@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Java Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content">
+        <div class="alert alert-success" th:if="${newTopic}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong th:text="${newTopic}"></strong>
+        </div>
+        <div class="row">
+            <div class="col-md-4" th:each="category : ${categories}">
+                <header>
+                    <h2>
+                        <img class="img-circle" th:src="@{/images/categories/{picture}(picture=${category.picture})}" height="43" width="43"/>
+                        <a th:href="@{/category/{id}(id=${category.id})}" th:text="${category.name + ' (' + #sets.size(category.forums) + ')'}">
+                        </a>
+                    </h2>
+
+                </header>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

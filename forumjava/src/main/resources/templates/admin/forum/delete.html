@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+
+<main>
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <div class="alert alert-danger">
+                <h4><strong>Warning!</strong> You are about to delete this forum with all associated topics and replies. Are you sure ?</h4>
+            </div>
+            <form class="form-horizontal" th:action="@{/admin/forum/delete/{id}(id=${forum.id})}" method="POST">
+                <fieldset>
+                    <legend>Delete Forum</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="forum_title">Forum Title</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="forum_title" placeholder="Post Title" name="title" th:value="${forum.title}" disabled="disabled"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="forum_content">Description</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" rows="6" id="forum_content" name="content" th:field="${forum.description}" disabled="disabled"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="forum_category">Category</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" rows="6" id="forum_category" name="categoryId" th:field="${forum.category.name}" disabled="disabled"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <input type="submit" class="btn btn-danger" value="Delete"/>
+                            <a class="btn btn-default" th:href="@{/admin/forums}">Cancel</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>

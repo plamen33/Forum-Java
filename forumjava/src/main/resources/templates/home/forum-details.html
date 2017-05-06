@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+    <title>Software Forum</title>
+</head>
+
+<body>
+<header th:replace="layout :: header" />
+<main>
+    <div class="container body-content">
+        <div class="alert alert-warning" th:if="${deleteTopic}">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong th:text="${deleteTopic}"></strong>
+        </div>
+        <div class="well">
+            <header>
+                <h3 th:text="${forum.title}"> Forum:</h3>
+            </header>
+            <!--<p th:text="${forum.description}"> </p>-->
+            <p>
+                <text th:text="${forum.description}"> </text>
+                <span class="pull-right" ><a class="btn btn-primary btn-sm" th:href="@{/category/{id}(id = ${category.id})}">Back</a></span>
+            </p>
+
+            <div class="row">
+                <table class="table table-striped table-hover ">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Topic</th>
+                        <th>Author</th>
+                        <th>Views</th>
+                        <th>Replies</th>
+                        <th>Last reply</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="topic : ${topics}">
+                        <td th:text="${topicStat.count}"></td>
+                        <td><a th:href="@{/topic/{id}(id=${topic.id}) }" th:text="${topic.title}"></a></td>
+                        <td th:text="${topic.author.fullName}"></td>
+                        <td th:text="${topic.visits}"></td>
+                        <td th:text="${topic.replies.size()}"></td>
+                        <td th:text="${topic.lastReply}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="layout :: footer" />
+</body>
+
+</html>
+
+<!--<td th:if="${topic.replies.size() != 0}">-->
+    <!--<text th:text="${reply.dateUpdated}"></text>-->
+    <!--<text> by </text>-->
+    <!--<text th:text="${reply.author.fullName}"></text>-->
+<!--</td>-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head th:replace="layout :: head">-->
+    <!--<title>Software Forum</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<header th:replace="layout :: header" />-->
+
+<!--<main>-->
+    <!--<div class="container body-content">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+                <!--<topic>-->
+                    <!--<header>-->
+                        <!--<h3 th:text="${forum.title}"> Forum:</h3>-->
+                    <!--</header>-->
+
+                    <!--<p th:text="${forum.description}"> </p>-->
+
+
+                    <!--<footer>-->
+                        <!--<div class="pull-right">-->
+                            <!--<a class="btn btn-default btn-xs" th:href="@{/}">back &raquo;</a>-->
+                        <!--</div>-->
+                    <!--</footer>-->
+                <!--</topic>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br/>-->
+    <!--<h3><p class="text-success">Topics:</p></h3>-->
+    <!--<th:block th:each="topic : ${topics}">-->
+        <!--<blockquote class="blockquote">-->
+            <!--<p>-->
+                <!--<a>&quot;</a><a th:text="${topic.title}"></a><a>&quot;</a>-->
+            <!--</p>-->
+            <!--<b><h5><strong><cite title="Source Title" th:text="${topic.content}"></cite></strong></h5></b>-->
+        <!--</blockquote>-->
+    <!--</th:block>-->
+<!--</main>-->
+
+<!--<footer th:replace="layout :: footer" />-->
+<!--</body>-->
+
+<!--</html>-->
